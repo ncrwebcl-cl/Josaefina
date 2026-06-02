@@ -236,12 +236,11 @@ body::before {
     filter: brightness(1.04) saturate(1.1) contrast(1.02);
 }
 
-/* Video: iframe de YouTube que se adapta dentro del marco, mostrando todo el video sin deformar */
+/* Video: iframe de YouTube */
 .video-frame iframe {
     width: 100%;
     height: 100%;
     border: none;
-    object-fit: cover; /* para que llene el marco (puede recortar un poco) pero se ve mejor */
 }
 
 /* Decoraciones flotantes */
@@ -281,7 +280,7 @@ body::before {
     to { transform: translateY(-12px) rotate(6deg); }
 }
 
-/* Botón para activar sonido */
+/* Botón para activar sonido (mejorado) */
 .sound-button-container {
     display: flex;
     justify-content: center;
@@ -389,22 +388,17 @@ body::before {
             </div>
         </div>
 
-        <!-- Video de YouTube con autoplay silenciado + botón activar sonido -->
+        <!-- Video de YouTube con autoplay forzado (silenciado) + control de sonido con un clic -->
         <div class="video-wrap">
             <span class="ef a">🎬</span>
             <span class="ef b">🔊</span>
             <span class="ef c">💛</span>
             <span class="ef d">🎂</span>
             <div class="video-frame">
-                <iframe id="youtubeVideo" 
-                        src="https://www.youtube.com/embed/8j3CHiwKZRw?autoplay=1&mute=1&loop=1&playlist=8j3CHiwKZRw&controls=1&modestbranding=1&rel=0"
-                        title="Feliz Cumpleaños Josefina"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
+                <div id="youtubePlayer"></div>
             </div>
             <div class="sound-button-container">
-                <button id="unmuteButton" class="sound-btn">🔇 ACTIVAR SONIDO 🔊</button>
+                <button id="unmuteButton" class="sound-btn">🔇 ACTIVAR SONIDO (1 clic)</button>
             </div>
         </div>
     </div>
@@ -424,7 +418,7 @@ body::before {
 </div>
 
 <script>
-    // Estrellas
+    // ===== ESTRELLAS Y CONFETI =====
     const starsContainer = document.getElementById('stars');
     for (let i = 0; i < 130; i++) {
         const star = document.createElement('div');
@@ -439,7 +433,6 @@ body::before {
         starsContainer.appendChild(star);
     }
 
-    // Confeti
     const confettiWrap = document.getElementById('confetti');
     const vividConfettiColors = ['#ff2a6d', '#ffb300', '#00e5ff', '#ff5e00', '#b000ff', '#ffea00', '#48ff9e', '#ff88cc'];
     for (let i = 0; i < 60; i++) {
@@ -459,36 +452,79 @@ body::before {
         confettiWrap.appendChild(conf);
     }
 
-    // Activar sonido del iframe de YouTube (cambiando el mute)
-    const iframe = document.getElementById('youtubeVideo');
+    // ===== API DE YOUTUBE PARA CONTROL TOTAL =====
+    let player;
     const unmuteBtn = document.getElementById('unmuteButton');
-    
-    // Función para activar sonido: recargar iframe con autoplay y sin mute
-    // (No se puede cambiar el mute directamente en iframe, hay que recargar)
-    function activateSound() {
-        const videoSrc = iframe.src;
-        // Reemplazar mute=1 por mute=0
-        let newSrc = videoSrc.replace('mute=1', 'mute=0');
-        if (!newSrc.includes('mute=0')) {
-            newSrc = newSrc + '&mute=0';
-        }
-        iframe.src = newSrc;
-        unmuteBtn.innerHTML = '🔊 SONIDO ACTIVADO ✅';
-        unmuteBtn.disabled = true;
-        unmuteBtn.style.opacity = '0.7';
-        unmuteBtn.style.cursor = 'default';
+    let soundActivated = false;
+
+    // Cargar la API de YouTube
+    function loadYouTubeAPI() {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
 
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('youtubePlayer', {
+            videoId: '8j3CHiwKZRw',
+            playerVars: {
+                'autoplay': 1,      // Autoplay obligatorio
+                'mute': 1,          // Inicia silenciado para cumplir políticas
+                'loop': 1,
+                'playlist': '8j3CHiwKZRw',
+                'controls': 1,
+                'modestbranding': 1,
+                'rel': 0,
+                'enablejsapi': 1
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onError': onPlayerError
+            }
+        });
+    };
+
+    function onPlayerReady(event) {
+        // El video se reproduce automáticamente (silenciado)
+        event.target.playVideo();
+        // Mostramos mensaje amigable
+        console.log("Video reproduciéndose automáticamente (sin sonido).");
+    }
+
+    function onPlayerError(event) {
+        console.error("Error de YouTube:", event.data);
+        // Fallback: si falla la API, mostrar un mensaje
+        const container = document.getElementById('youtubePlayer');
+        container.innerHTML = '<div style="color:#fff; background:#000; display:flex; align-items:center; justify-content:center; height:100%;">⚠️ No se pudo cargar el video. Haz clic para intentar.</div>';
+    }
+
+    // Función para activar sonido y desmutear
+    function activateSound() {
+        if (soundActivated) return;
+        if (player && typeof player.unMute === 'function') {
+            player.unMute();
+            soundActivated = true;
+            unmuteBtn.innerHTML = '🔊 SONIDO ACTIVADO ✅';
+            unmuteBtn.disabled = true;
+            unmuteBtn.style.opacity = '0.7';
+            unmuteBtn.style.cursor = 'default';
+        }
+    }
+
+    // Botón para activar sonido
     unmuteBtn.addEventListener('click', activateSound);
     
-    // También si el usuario hace clic en cualquier parte de la página por si acaso
+    // También activar sonido con el primer clic en cualquier lugar de la página (sin necesidad de buscar el botón)
     document.body.addEventListener('click', function once() {
-        // Solo si el botón no ha sido presionado y el video sigue muteado
-        if (!unmuteBtn.disabled) {
+        if (!soundActivated) {
             activateSound();
         }
         document.body.removeEventListener('click', once);
     });
+
+    // Iniciar la API
+    loadYouTubeAPI();
 </script>
 </body>
 </html>
