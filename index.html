@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>🎂 ¡Feliz Cumpleaños Josefina! | Con amor desde la distancia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --vivid-pink: #ff2a6d;
+    --vivid-orange: #ff8c00;
+    --vivid-gold: #ffd700;
+    --vivid-purple: #b000ff;
+    --vivid-cyan: #00e5ff;
+    --deep-vibrant-bg: #1a0b2e;
+    --text-light: #fff9e6;
+}
+
+html, body {
+    min-height: 100vh;
+    font-family: 'Lato', sans-serif;
+    background: linear-gradient(145deg, #2e0e4a 0%, #4a0e2e 100%);
+    overflow-x: hidden;
+}
+
+/* fondo animado */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(ellipse at 30% 40%, rgba(255, 42, 109, 0.5) 0%, rgba(0, 229, 255, 0.25) 45%, rgba(178, 255, 0, 0.15) 100%);
+    animation: vividShift 12s ease infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes vividShift {
+    0% { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.08); background-position: 100% 50%; }
+}
+
+/* estrellas */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    background: radial-gradient(circle, #fffbc2, #ffdd77);
+    border-radius: 50%;
+    box-shadow: 0 0 6px gold;
+    animation: twinkleStar 3s infinite alternate;
+}
+
+@keyframes twinkleStar {
+    0% { opacity: 0.2; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.4); }
+}
+
+/* confeti */
+.confetti-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.cp {
+    position: absolute;
+    top: -30px;
+    animation: fallConfetti linear forwards;
+}
+
+@keyframes fallConfetti {
+    0% { transform: translateY(-30px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0.2; }
+}
+
+/* página principal */
+.page {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 18px 40px;
+}
+
+/* manos de bendición */
+.hands-top, .hands-bottom {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 10px 0;
+    animation: gentlePulse 1.8s infinite ease;
+    filter: drop-shadow(0 0 8px #ffcc88);
+}
+.hands-bottom {
+    margin-top: 20px;
+}
+@keyframes gentlePulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.1); opacity: 1; }
+}
+
+/* banner */
+.banner {
+    text-align: center;
+    margin-bottom: 12px;
+    animation: glamDrop 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1) both;
+}
+
+@keyframes glamDrop {
+    from { opacity: 0; transform: translateY(-45px) rotate(-3deg); }
+    to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+.from-label {
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--vivid-gold);
+    text-shadow: 0 0 8px #ff5e00;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.happy-text {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 800;
+    font-size: clamp(3rem, 10vw, 5.6rem);
+    background: linear-gradient(135deg, #ffd966, #ff6ac6, #ffb347, #ffeb3b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 18px #ff4081) drop-shadow(0 0 5px #ffcc00);
+    line-height: 1.1;
+    animation: glowPulse 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+    0% { filter: drop-shadow(0 0 5px #ffb347) drop-shadow(0 0 2px gold); }
+    100% { filter: drop-shadow(0 0 25px #ff2a6d) drop-shadow(0 0 12px #ffcc33); }
+}
+
+.name-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 7vw, 4.2rem);
+    font-weight: 800;
+    background: linear-gradient(120deg, #fff5ba, #ffd966);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px #ff6a00;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 6px auto 18px;
+    width: 80%;
+    max-width: 300px;
+}
+.dl {
+    flex: 1;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #ffaa44, #ff44cc, #ffaa44, transparent);
+    border-radius: 4px;
+}
+.divider span {
+    color: #ffdd88;
+    font-size: 1.5rem;
+    filter: drop-shadow(0 0 5px fuchsia);
+}
+
+/* Contenedor principal: foto + video lado a lado mismo estilo */
+.media-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 24px;
+    margin: 10px 0 5px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.photo-wrap, .video-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+    animation: popZoom 0.8s 0.3s ease both;
+}
+@keyframes popZoom {
+    from { opacity: 0; transform: scale(0.75) rotate(-3deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* Marco idéntico para foto y video */
+.photo-frame, .video-frame {
+    width: 100%;
+    aspect-ratio: 4 / 5; /* misma relación de aspecto para que cuadren */
+    background: #00000030;
+    border-radius: 32px;
+    overflow: hidden;
+    border: 4px solid #FFD966;
+    box-shadow: 0 25px 40px rgba(0,0,0,0.5), 0 0 0 8px rgba(255, 200, 100, 0.25), 0 0 0 12px rgba(255, 80, 120, 0.2);
+    transition: transform 0.2s ease;
+}
+
+/* Foto: cubre todo el marco */
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+    filter: brightness(1.04) saturate(1.1) contrast(1.02);
+}
+
+/* Video: iframe de YouTube que se adapta dentro del marco, mostrando todo el video sin deformar */
+.video-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    object-fit: cover; /* para que llene el marco (puede recortar un poco) pero se ve mejor */
+}
+
+/* Decoraciones flotantes */
+.photo-wrap::before, .video-wrap::before {
+    content: "✨";
+    position: absolute;
+    top: -20px;
+    left: -15px;
+    font-size: 2rem;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 4px gold);
+    pointer-events: none;
+}
+.photo-wrap::after, .video-wrap::after {
+    content: "✨";
+    position: absolute;
+    bottom: -20px;
+    right: -15px;
+    font-size: 2rem;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 4px gold);
+    pointer-events: none;
+}
+.ef {
+    position: absolute;
+    font-size: 2rem;
+    animation: floatBling 2.5s infinite alternate;
+    filter: drop-shadow(0 0 6px rgba(255,215,0,0.8));
+    z-index: 3;
+}
+.ef.a { top: -18px; left: -18px; animation-delay: 0s; }
+.ef.b { top: -20px; right: -20px; animation-delay: 0.3s; }
+.ef.c { bottom: -12px; left: -25px; animation-delay: 0.6s; }
+.ef.d { bottom: -10px; right: -25px; animation-delay: 0.9s; }
+@keyframes floatBling {
+    from { transform: translateY(0px) rotate(-6deg); }
+    to { transform: translateY(-12px) rotate(6deg); }
+}
+
+/* Botón para activar sonido */
+.sound-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.sound-btn {
+    background: linear-gradient(95deg, #ff416c, #ffbe3c);
+    border: none;
+    border-radius: 60px;
+    padding: 8px 24px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #21002e;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    transition: all 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+.sound-btn:hover {
+    transform: scale(1.02);
+    background: linear-gradient(95deg, #ff5e7e, #ffd966);
+    box-shadow: 0 0 15px #ff884d;
+}
+
+/* Dedicatoria justo debajo */
+.dedicatoria {
+    width: 100%;
+    max-width: 900px;
+    margin: 10px auto 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(18px);
+    border: 2px solid rgba(255, 220, 100, 0.7);
+    border-radius: 48px 28px 54px 30px;
+    padding: 20px 26px;
+    text-align: center;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 100, 200, 0.5);
+}
+.dedicatoria p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 3.5vw, 1.2rem);
+    line-height: 1.7;
+    color: #fff2db;
+    text-shadow: 0 1px 3px #800040;
+}
+.sender {
+    margin-top: 18px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.55rem;
+    color: #ffdd99;
+    font-weight: bold;
+}
+
+.footer-hearts {
+    text-align: center;
+    font-size: 1.6rem;
+    letter-spacing: 8px;
+    margin: 20px 0 5px;
+    color: #ffddbb;
+}
+
+@media (max-width: 750px) {
+    .media-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .photo-wrap, .video-wrap {
+        width: 90%;
+        max-width: 380px;
+    }
+    .hands-top, .hands-bottom {
+        font-size: 2rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="confetti-wrap" id="confetti"></div>
+
+<div class="page">
+    <div class="hands-top">🙏✨ DIOS TE BENDIGA ✨🙏</div>
+
+    <div class="banner">
+        <div class="from-label">🎈 CON AMOR, DESDE LA DISTANCIA 🎈</div>
+        <div class="happy-text">¡Feliz Cumpleaños!</div>
+        <div class="name-text">Josefina</div>
+    </div>
+
+    <div class="divider"><div class="dl"></div><span>✨🎂✨</span><div class="dl"></div></div>
+
+    <div class="media-row">
+        <!-- Foto -->
+        <div class="photo-wrap">
+            <span class="ef a">🌸</span>
+            <span class="ef b">🎁</span>
+            <span class="ef c">💖</span>
+            <span class="ef d">🎉</span>
+            <div class="photo-frame">
+                <img src="Josefina.png" alt="Josefina - Feliz Cumpleaños">
+            </div>
+        </div>
+
+        <!-- Video de YouTube con autoplay silenciado + botón activar sonido -->
+        <div class="video-wrap">
+            <span class="ef a">🎬</span>
+            <span class="ef b">🔊</span>
+            <span class="ef c">💛</span>
+            <span class="ef d">🎂</span>
+            <div class="video-frame">
+                <iframe id="youtubeVideo" 
+                        src="https://www.youtube.com/embed/8j3CHiwKZRw?autoplay=1&mute=1&loop=1&playlist=8j3CHiwKZRw&controls=1&modestbranding=1&rel=0"
+                        title="Feliz Cumpleaños Josefina"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <div class="sound-button-container">
+                <button id="unmuteButton" class="sound-btn">🔇 ACTIVAR SONIDO 🔊</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dedicatoria justo debajo -->
+    <div class="dedicatoria">
+        <p>
+            🌟 En este día tan especial, desde la distancia te envío todo mi cariño y mis mejores deseos. 🌟<br><br>
+            Que Dios te llene de salud, alegría y bendiciones hoy y siempre. Eres una persona muy especial para mí, prima querida.<br>
+            Te quiero mucho y rezo por ti. ¡Que tengas un cumpleaños maravilloso! 💖✨
+        </p>
+        <div class="sender">Con todo mi amor, desde lejos pero cerca en el corazón,<br>Noreby 🌹</div>
+    </div>
+
+    <div class="hands-bottom">🙏✨ DIOS TE BENDIGA SIEMPRE ✨🙏</div>
+    <div class="footer-hearts">🌸 💛 🙏 💛 🌸</div>
+</div>
+
+<script>
+    // Estrellas
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 130; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        const size = Math.random() * 3.5 + 1.2;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.animationDuration = `${Math.random() * 3 + 1.5}s`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        starsContainer.appendChild(star);
+    }
+
+    // Confeti
+    const confettiWrap = document.getElementById('confetti');
+    const vividConfettiColors = ['#ff2a6d', '#ffb300', '#00e5ff', '#ff5e00', '#b000ff', '#ffea00', '#48ff9e', '#ff88cc'];
+    for (let i = 0; i < 60; i++) {
+        const conf = document.createElement('div');
+        conf.classList.add('cp');
+        const color = vividConfettiColors[Math.floor(Math.random() * vividConfettiColors.length)];
+        const w = Math.random() * 12 + 5;
+        const h = Math.random() * 12 + 5;
+        conf.style.width = `${w}px`;
+        conf.style.height = `${h}px`;
+        conf.style.background = color;
+        conf.style.left = `${Math.random() * 100}%`;
+        conf.style.animationDuration = `${Math.random() * 5 + 4}s`;
+        conf.style.animationDelay = `${Math.random() * 6}s`;
+        conf.style.borderRadius = Math.random() > 0.6 ? '50%' : '2px';
+        conf.style.opacity = '0.9';
+        confettiWrap.appendChild(conf);
+    }
+
+    // Activar sonido del iframe de YouTube (cambiando el mute)
+    const iframe = document.getElementById('youtubeVideo');
+    const unmuteBtn = document.getElementById('unmuteButton');
+    
+    // Función para activar sonido: recargar iframe con autoplay y sin mute
+    // (No se puede cambiar el mute directamente en iframe, hay que recargar)
+    function activateSound() {
+        const videoSrc = iframe.src;
+        // Reemplazar mute=1 por mute=0
+        let newSrc = videoSrc.replace('mute=1', 'mute=0');
+        if (!newSrc.includes('mute=0')) {
+            newSrc = newSrc + '&mute=0';
+        }
+        iframe.src = newSrc;
+        unmuteBtn.innerHTML = '🔊 SONIDO ACTIVADO ✅';
+        unmuteBtn.disabled = true;
+        unmuteBtn.style.opacity = '0.7';
+        unmuteBtn.style.cursor = 'default';
+    }
+
+    unmuteBtn.addEventListener('click', activateSound);
+    
+    // También si el usuario hace clic en cualquier parte de la página por si acaso
+    document.body.addEventListener('click', function once() {
+        // Solo si el botón no ha sido presionado y el video sigue muteado
+        if (!unmuteBtn.disabled) {
+            activateSound();
+        }
+        document.body.removeEventListener('click', once);
+    });
+</script>
+</body>
+</html>
